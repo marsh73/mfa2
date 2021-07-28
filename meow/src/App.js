@@ -7,11 +7,11 @@ import "./App.css";
 
 const defaultHistory = createBrowserHistory();
 
-function App({ history = defaultHistory, TestContext }) {
+function App({ history = defaultHistory }) {
   return (
     <Router history={history}>
       <Route exact path="/" >
-        {/* <RandomMeow TestContext={TestContext} /> */}
+        <RandomMeow  />
       </Route>
       <Route exact path="/cat/:greeting" component={GreetingMeow} />
     </Router>

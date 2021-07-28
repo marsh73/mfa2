@@ -5,9 +5,9 @@ import App from './App';
 import { unregister } from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
-window.renderMeow = (containerId, history, TestContext) => {
+window.renderMeow = (containerId, history) => {
   ReactDOM.render(
-    <App history={history} TestContext={TestContext}/>,
+    <App history={history} />,
     document.getElementById(containerId),
   );
   unregister();
@@ -26,3 +26,4 @@ if (!document.getElementById('Meow-container')) {
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+

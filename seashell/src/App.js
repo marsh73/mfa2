@@ -1,7 +1,7 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MicroFrontend from "./MicroFrontend";
-
+import { NotificationsContextProvider, NotificationsContext } from '@do/walrus/shell/NotificationsContext';
 import "./App.css";
 
 const {
@@ -22,29 +22,29 @@ function Woof({ history }) {
   return <MicroFrontend history={history} host={woofHost} name="Woof" />;
 }
 
-function Meow({ history, TestContext }) {
-  return <MicroFrontend history={history} host={meowHost} TestContext={TestContext} name="Meow" />;
+function Meow({ history }) {
+  return <MicroFrontend history={history} host={meowHost} name="Meow" />;
 }
 
-function GreetingMeow({ history, TestContext }) {
+function GreetingMeow({ history }) {
   return (
     <div>
       <div className="home">
-        <MicroFrontend history={history} host={meowHost} name="Meow" TestContext={TestContext}/>
+        <MicroFrontend history={history} host={meowHost} name="Meow" />
       </div>
     </div>
   );
 }
 
-function Home({ history, TestContext }) {
+function Home({ history }) {
   const [input, setInput] = useState("");
 
   const handleOnClick = () => {
     history.push(`/cat/${input}`);
   };
 
-  const { user } = useContext(TestContext);
-
+  const { notifications } = useContext(NotificationsContext);
+  console.log('notifications ', notifications );
   return (
     <div>
       <div className="home">
@@ -53,13 +53,13 @@ function Home({ history, TestContext }) {
           defaultValue={input}
           onBlur={(e) => setInput(e.target.value)}
         />
-        <button onClick={handleOnClick}>Greet Me, {user.name}</button>
+        <button onClick={handleOnClick}>Greet Me</button>
       </div>
 
       <div className="home">
         <div className="content">
           <div className="cat">
-            {/* <Meow TestContext={TestContext}/> */}
+            <Meow />
           </div>
           <div className="dog">
             <Woof />
@@ -70,15 +70,15 @@ function Home({ history, TestContext }) {
   );
 }
 
-function Routes({TestContext}) {
+function Routes() {
   return (
     <Router>
       <Switch>
         <Route exact path="/">
-          <Home TestContext={TestContext} />
+          <Home/>
         </Route>
         <Route path="/cat" >
-          <Meow TestContext={TestContext}/>
+          <Meow />
         </Route>
       </Switch>
     </Router>
@@ -88,19 +88,11 @@ function Routes({TestContext}) {
 
 
 function App() {
-  const TestContext = createContext(null);
-  const [user, updateUser] = useState({name: 'marsh'});
-
 
   return (
     <div>
-      <TestContext.Provider value={{
-        user,
-        updateUser
-      }}>
         <Header/>
-        <Routes TestContext={TestContext} />
-      </TestContext.Provider>
+        <Routes  />
     </div>
   );
 }

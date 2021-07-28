@@ -1,11 +1,8 @@
 
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 
-export default function RandomMeow({TestContext}) {
+export default function RandomMeow() {
   const [randomCatImg, setRandomCatImg] = useState(null);
-
-  const user = useContext(TestContext);
-console.log('test', user);
 
   const fetchRandomCat = () => {
     setRandomCatImg("");
