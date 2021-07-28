@@ -7,9 +7,9 @@ seashell/node_modules
 meow/build
 woof/build
 seashell/build
-meow/yarn.lock
-woof/yarn.lock
-seashell/yarn.lock
+#meow/yarn.lock
+#woof/yarn.lock
+#seashell/yarn.lock
 
 
 # misc
